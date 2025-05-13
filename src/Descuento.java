@@ -2,13 +2,11 @@ public class Descuento {
     public static double calculateDiscount(int productCount, double totalPrice, boolean isPremiumMember) {
         double discount = 0;
 
-       if (productCount < 10) {
-           if (productCount >=5){
-               discount +=0.1;
-           }
-       } else {
-           discount += 0.15;
-       }
+        if (productCount >= 10) {
+            discount = 0.15;
+        } else if (productCount >= 5) {
+            discount = 0.1;
+        }
 
         if (totalPrice > 500) {
             discount += 0.1;
@@ -20,12 +18,6 @@ public class Descuento {
             discount += 0.05;
         }
 
-        double finalDiscount = discount * totalPrice;
-
-        if (finalDiscount > 0.3 * totalPrice) {
-            return 0.3 * totalPrice;
-        } else {
-            return finalDiscount;
-        }
+        return Math.min(discount * totalPrice, 0.3 * totalPrice);
     }
 }
